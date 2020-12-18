@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Equipment } from './equipment';
 
 @Component({
   selector: 'app-equipment',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./equipment.component.css']
 })
 export class EquipmentComponent implements OnInit {
-   equipmentItems: object[] = [
+   equipmentItems: Equipment[] = [
        {name: 'Duct Tape', mass: 0.5},
        {name: 'Space Camera', mass: 20},
        {name: 'Food', mass: 150},
@@ -15,7 +16,7 @@ export class EquipmentComponent implements OnInit {
        {name: 'ISS Supplies', mass: 800},
        {name: 'Water', mass: 250},
        {name: 'Satellite', mass: 1200},
-       {name: 'R2 Unit', mass: 32}
+       {name: 'R2 Unit', mass: 32},
    ];
    cargoHold: object[] = [];
    cargoMass: number = 0;
@@ -26,6 +27,10 @@ export class EquipmentComponent implements OnInit {
 
    ngOnInit() { }
 
-   // Code your addItem function here:
-   
+//    // Code your addItem function here:
+addItem(equipment:Equipment) :boolean {
+  this.cargoHold.push(equipment);
+  this.cargoMass += equipment.mass;
+  return (this.maximumAllowedMass - this.cargoMass) < 200;
+}
 }
